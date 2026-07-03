@@ -105,13 +105,20 @@ function initMusicControls() {
 // ==========================================
 let scene, camera, renderer, heartMesh, letterW, letterA;
 
+
 function initThreeJSScene() {
     const container = document.getElementById('heart-3d-container');
     if(!container) return;
 
+    // كشف ما إذا كان المستخدم يستخدم هاتفاً
+    const isMobile = window.innerWidth < 768;
+    
+    // تعديل المسافة بناءً على الجهاز (في الهاتف نبتعد بالكاميرا قليلاً)
+    const cameraZ = isMobile ? 130 : 85;
+    
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.z = 85; 
+    camera.position.z = cameraZ; 
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -124,6 +131,7 @@ function initThreeJSScene() {
     dirLight.position.set(0, 60, 120);
     scene.add(dirLight);
 
+    // ... [كود إنشاء القلب والأحرف يبقى كما هو] ...
     const heartShape = new THREE.Shape();
     heartShape.moveTo( 25, 25 );
     heartShape.bezierCurveTo( 25, 25, 20, 0, 0, 0 );
@@ -140,7 +148,10 @@ function initThreeJSScene() {
     const luxuryMaterial = new THREE.MeshStandardMaterial({ color: 0xd6133d, roughness: 0.15, metalness: 0.5, emissive: 0x2b0004 });
     heartMesh = new THREE.Mesh(heartGeo, luxuryMaterial);
     heartMesh.rotation.x = Math.PI; 
-    heartMesh.scale.set(0.4, 0.4, 0.4);
+    
+    // تعديل حجم القلب للأجهزة المختلفة
+    const scaleFactor = isMobile ? 0.3 : 0.4;
+    heartMesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
     scene.add(heartMesh);
 
     // مجسم حرف W
@@ -151,8 +162,8 @@ function initThreeJSScene() {
     letterGeoW.center();
     const goldMaterial = new THREE.MeshStandardMaterial({ color: 0xffd700, roughness: 0.2, metalness: 0.8 });
     letterW = new THREE.Mesh(letterGeoW, goldMaterial);
-    letterW.position.set(-36, 0, 2); 
-    letterW.scale.set(0.65, 0.65, 0.65);
+    letterW.position.set(isMobile ? -30 : -36, 0, 2); // تقريب الأحرف قليلاً في الموبايل
+    letterW.scale.set(scaleFactor * 1.6, scaleFactor * 1.6, scaleFactor * 1.6);
     scene.add(letterW);
 
     // مجسم حرف A
@@ -166,10 +177,11 @@ function initThreeJSScene() {
     letterGeoA.center();
     const roseMaterial = new THREE.MeshStandardMaterial({ color: 0xff69b4, roughness: 0.2, metalness: 0.7 });
     letterA = new THREE.Mesh(letterGeoA, roseMaterial);
-    letterA.position.set(36, 0, 2); 
-    letterA.scale.set(0.65, 0.65, 0.65);
+    letterA.position.set(isMobile ? 30 : 36, 0, 2); // تقريب الأحرف قليلاً في الموبايل
+    letterA.scale.set(scaleFactor * 1.6, scaleFactor * 1.6, scaleFactor * 1.6);
     scene.add(letterA);
 
+    // ... [باقي دالة الـ animate تبقى كما هي] ...
     let clock = new THREE.Clock();
     function animate() {
         requestAnimationFrame(animate);
@@ -184,7 +196,7 @@ function initThreeJSScene() {
             letterA.position.y = Math.sin(time * 1.5 + Math.PI) * 2;
         }
         let pulse = 1 + Math.sin(time * 2.5) * 0.04;
-        if(heartMesh) heartMesh.scale.set(pulse * 0.4, pulse * 0.4, pulse * 0.4);
+        heartMesh.scale.set(pulse * scaleFactor, pulse * scaleFactor, pulse * scaleFactor);
         renderer.render(scene, camera);
     }
     animate();
@@ -194,39 +206,6 @@ function initThreeJSScene() {
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth, container.clientHeight);
     });
-}
-
-// تشغيل وحساب العدادات الزمنية
-function initLiveCounters() {
-    const grid = document.getElementById("counters-grid");
-    if(!grid) return;
-    grid.innerHTML = "";
-    
-    importantDates.forEach((item, idx) => {
-        const card = document.createElement("div");
-        card.className = "counter-card";
-        card.setAttribute("data-aos", "fade-up");
-        card.innerHTML = `<i class="fas ${item.icon}"></i><h3>${item.title}</h3><div class="counter-time" id="counter-time-${idx}"></div>`;
-        grid.appendChild(card);
-    });
-
-    setInterval(() => {
-        const now = new Date().getTime();
-        importantDates.forEach((item, idx) => {
-            const target = new Date(item.date).getTime();
-            let diff = now - target;
-            let prefix = "منذ: ";
-            if (diff < 0) { prefix = "متبقي: "; diff = Math.abs(diff); }
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            const el = document.getElementById(`counter-time-${idx}`);
-            if(el) el.innerHTML = `${prefix} ${d} يوم و ${h}س : ${m}د : ${s}ث`;
-        });
-    }, 1000);
 }
 
 // ==========================================
