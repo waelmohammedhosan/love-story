@@ -1,0 +1,437 @@
+/* إعدادات عامة وتصفير الهوامش */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0b0205;
+    color: #ffffff;
+    font-family: 'Tajawal', sans-serif;
+    overflow-x: hidden;
+}
+
+/* شاشة البداية الفاخرة */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, #200107 0%, #050001 100%);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.splash-content h1 {
+    font-size: 2.5rem;
+    color: #ff416c;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 65, 108, 0.5);
+}
+
+.splash-content p {
+    font-size: 1.3rem;
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+/* الأزرار الرومانسية */
+.romantic-btn {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    color: white;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: 'Tajawal', sans-serif;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(255, 65, 108, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.romantic-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 65, 108, 0.6);
+}
+
+/* زر الموسيقى العائم */
+.floating-music-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 65, 108, 0.2);
+    border: 2px solid #ff416c;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    transition: background 0.3s, transform 0.3s;
+}
+
+.floating-music-btn.playing {
+    background: #ff416c;
+    animation: pulseBtn 1.5s infinite alternate;
+}
+
+@keyframes pulseBtn {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); box-shadow: 0 0 15px #ff416c; }
+}
+
+/* ضبط القسم الرئيسي لتوزيع العناصر عمودياً ومنع التداخل */
+#hero {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* حاوية محرك 3D للقلب والأحرف */
+#heart-3d-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75vh;
+    z-index: 1;
+}
+
+.hero-text-overlay {
+    position: relative;
+    margin-bottom: 6vh;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.glow-text {
+    font-size: 3.2rem;
+    color: #ffffff;
+    font-weight: 900;
+    font-family: 'Tajawal', sans-serif;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #ff416c, 0 0 20px #ff416c, 0 0 30px #ff4b2b, 0 0 40px #ff4b2b;
+    animation: romanticGlow 2s infinite alternate ease-in-out;
+}
+
+@keyframes romanticGlow {
+    from {
+        text-shadow: 0 0 10px #ff416c, 0 0 20px #ff416c, 0 0 30px #ff4b2b, 0 0 40px #ff4b2b;
+        transform: scale(1);
+    }
+    to {
+        text-shadow: 0 0 15px #ff6584, 0 0 30px #ff6584, 0 0 45px #ff85a2, 0 0 60px #ff85a2;
+        transform: scale(1.04);
+    }
+}
+
+/* قسم العدادات وشبكة التوقيت */
+#counters-section {
+    padding: 80px 20px;
+    background: linear-gradient(to bottom, #0b0205, #16030a);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #ff6584;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #b3a2a7;
+    margin-bottom: 50px;
+    font-style: italic;
+}
+
+.counters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.counter-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.counter-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 65, 108, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.counter-card i {
+    font-size: 2.5rem;
+    color: #ff416c;
+    margin-bottom: 15px;
+}
+
+.counter-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.counter-time {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffcfd8;
+    direction: ltr;
+}
+
+/* 📸 معرض الصور والفيديو المطور */
+#gallery-section {
+    padding: 80px 20px;
+    background: linear-gradient(to bottom, #16030a, #0b0205);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 280px;
+    cursor: pointer;
+    border: 2px solid rgba(255, 65, 108, 0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s;
+}
+
+.gallery-item img, .gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(255, 65, 108, 0.4);
+    border-color: #ff416c;
+}
+
+.gallery-item:hover img, .gallery-item:hover video {
+    transform: scale(1.08);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(214, 19, 61, 0.85), rgba(0, 0, 0, 0.3));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay span {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* 🖼️ شاشة تكبير الصور والفيديو الموحدة (Lightbox Modal) */
+#lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 1, 2, 0.96);
+    z-index: 10000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+#lightbox-img, #lightbox-video {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 12px;
+    box-shadow: 0 0 35px rgba(255, 65, 108, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+#lightbox-modal.active #lightbox-img, #lightbox-modal.active #lightbox-video {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 10001;
+    transition: color 0.2s;
+}
+
+.close-btn:hover { color: #ff416c; }
+
+/* قسم الاقتباس الرومانسي البليغ */
+.quote-container {
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    padding: 0 20px;
+}
+
+.romantic-quote {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    color: #ffcfd8;
+    font-style: italic;
+    text-shadow: 0 0 5px rgba(255, 65, 108, 0.3);
+}
+
+/* 💥 التنسيق السحري للبطاقة المنبثقة الطائرة (عند الضغط على الزر) */
+.surprise-card-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    width: 90%;
+    max-width: 450px;
+    background: rgba(20, 2, 7, 0.85);
+    border: 2px solid #ff416c;
+    box-shadow: 0 0 40px rgba(255, 65, 108, 0.7);
+    border-radius: 25px;
+    padding: 35px 25px;
+    text-align: center;
+    z-index: 99999;
+    backdrop-filter: blur(15px);
+    pointer-events: none; /* تمنع حجب الشاشة لكي تستمر في الضغط المكرر */
+}
+
+/* تأثير القلب النابض والـ 3D داخل البطاقة */
+.popup-heart-3d {
+    font-size: 4.5rem;
+    display: inline-block;
+    animation: heartBeat3D 0.8s infinite alternate ease-in-out;
+    filter: drop-shadow(0 0 15px #ff416c);
+    margin-bottom: 15px;
+}
+
+@keyframes heartBeat3D {
+    0% { transform: scale(1) rotateY(0deg); }
+    100% { transform: scale(1.18) rotateY(180deg); }
+}
+
+.popup-initials {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ffd700;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.popup-text {
+    font-size: 1.25rem;
+    color: #ffffff;
+    line-height: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.popup-date {
+    display: inline-block;
+    background: rgba(255, 65, 108, 0.2);
+    border: 1px dashed #ff416c;
+    padding: 8px 20px;
+    border-radius: 50px;
+    color: #ffcfd8;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* ⚖️ تذييل الصفحة الفخم (الحماية القانونية والمطور) */
+.romantic-footer {
+    background: #050002;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 65, 108, 0.1);
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer-content p {
+    font-size: 0.95rem;
+    color: #7c686e;
+    margin-bottom: 8px;
+}
+
+.footer-content .developer-tag {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.footer-content .developer-tag span {
+    color: #ff416c;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255, 65, 108, 0.4);
+}
+
+.footer-content .legal-notice {
+    font-size: 0.8rem;
+    color: #554348;
+    max-width: 700px;
+    margin: 15px auto 0 auto;
+    line-height: 1.4rem;
+}
+
+.footer-content .legal-notice i {
+    color: #d6133d;
+    margin-left: 5px;
+}
