@@ -12,8 +12,6 @@ body {
     overflow-x: hidden;
 }
 
-
-
 /* شاشة البداية الفاخرة */
 #splash-screen {
     position: fixed;
@@ -62,8 +60,6 @@ body {
     box-shadow: 0 8px 25px rgba(255, 65, 108, 0.6);
 }
 
-
-
 /* زر الموسيقى العائم */
 .floating-music-btn {
     position: fixed;
@@ -95,7 +91,7 @@ body {
     to { transform: scale(1.1); box-shadow: 0 0 15px #ff416c; }
 }
 
-/* ضبط القسم الرئيسي لتوزيع العناصر عمودياً ومنع التداخل */
+/* ضبط القسم الرئيسي */
 #hero {
     height: 100vh;
     width: 100vw;
@@ -106,8 +102,6 @@ body {
     justify-content: flex-end;
     align-items: center;
 }
-
-
 
 /* حاوية محرك 3D للقلب والأحرف */
 #heart-3d-container {
@@ -125,7 +119,7 @@ body {
     width: 100%;
     text-align: center;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     z-index: 10;
 }
@@ -140,6 +134,11 @@ body {
     animation: romanticGlow 2s infinite alternate ease-in-out;
 }
 
+.date-glow {
+    font-size: 2.8rem;
+    margin-top: 5px;
+}
+
 @keyframes romanticGlow {
     from {
         text-shadow: 0 0 10px #ff416c, 0 0 20px #ff416c, 0 0 30px #ff4b2b, 0 0 40px #ff4b2b;
@@ -151,7 +150,7 @@ body {
     }
 }
 
-/* قسم العدادات وشبكة التوقيت */
+/* قسم العدادات */
 #counters-section {
     padding: 80px 20px;
     background: linear-gradient(to bottom, #0b0205, #16030a);
@@ -218,7 +217,7 @@ body {
     direction: ltr;
 }
 
-/* 📸 معرض الصور والفيديو المطور */
+/* معرض الصور والفيديو */
 #gallery-section {
     padding: 80px 20px;
     background: linear-gradient(to bottom, #16030a, #0b0205);
@@ -241,7 +240,8 @@ body {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s;
 }
 
-.gallery-item img, .gallery-item video {
+.gallery-item img,
+.gallery-item video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -254,7 +254,8 @@ body {
     border-color: #ff416c;
 }
 
-.gallery-item:hover img, .gallery-item:hover video {
+.gallery-item:hover img,
+.gallery-item:hover video {
     transform: scale(1.08);
 }
 
@@ -280,10 +281,10 @@ body {
     color: #ffffff;
     font-size: 1.1rem;
     font-weight: bold;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* 🖼️ شاشة تكبير الصور والفيديو الموحدة (Lightbox Modal) */
+/* Lightbox */
 #lightbox-modal {
     position: fixed;
     top: 0;
@@ -298,7 +299,8 @@ body {
     backdrop-filter: blur(8px);
 }
 
-#lightbox-img, #lightbox-video {
+#lightbox-img,
+#lightbox-video {
     max-width: 90%;
     max-height: 80%;
     border-radius: 12px;
@@ -308,7 +310,8 @@ body {
     transition: transform 0.3s ease;
 }
 
-#lightbox-modal.active #lightbox-img, #lightbox-modal.active #lightbox-video {
+#lightbox-modal.active #lightbox-img,
+#lightbox-modal.active #lightbox-video {
     transform: scale(1);
 }
 
@@ -324,9 +327,11 @@ body {
     transition: color 0.2s;
 }
 
-.close-btn:hover { color: #ff416c; }
+.close-btn:hover {
+    color: #ff416c;
+}
 
-/* قسم الاقتباس الرومانسي البليغ */
+/* اقتباس رومانسي */
 .quote-container {
     max-width: 800px;
     margin: 0 auto 30px auto;
@@ -341,7 +346,7 @@ body {
     text-shadow: 0 0 5px rgba(255, 65, 108, 0.3);
 }
 
-/* 💥 التنسيق السحري للبطاقة المنبثقة الطائرة (عند الضغط على الزر) */
+/* البطاقة المنبثقة */
 .surprise-card-popup {
     position: fixed;
     top: 50%;
@@ -357,10 +362,9 @@ body {
     text-align: center;
     z-index: 99999;
     backdrop-filter: blur(15px);
-    pointer-events: none; /* تمنع حجب الشاشة لكي تستمر في الضغط المكرر */
+    pointer-events: none;
 }
 
-/* تأثير القلب النابض والـ 3D داخل البطاقة */
 .popup-heart-3d {
     font-size: 4.5rem;
     display: inline-block;
@@ -401,6 +405,8 @@ body {
     font-size: 1rem;
     font-weight: bold;
 }
+
+/* التذييل */
 .romantic-footer {
     background: rgba(15, 15, 15, 0.92);
     color: #fff;
@@ -446,21 +452,6 @@ body {
     margin-left: 6px;
 }
 
-
-.footer-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; /* المسافة بين العلم والنص */
-    font-size: 13px;
-    color: #777;
-}
-
-.footer-flag {
-    width: 24px;
-    height: 16px;
-}
-
 /* الأعلام */
 .flags {
     margin-top: 20px;
@@ -471,7 +462,7 @@ body {
 
 .flag-item {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     font-weight: bold;
     color: #303030;
@@ -484,7 +475,7 @@ body {
     width: 42px;
     height: 28px;
     border-radius: 5px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     margin-bottom: 5px;
 }
 
@@ -498,6 +489,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 25px;
+    flex-wrap: wrap;
 }
 
 .social a {
@@ -520,67 +512,12 @@ body {
     color: #008069;
 }
 
-/* حقوق */
-.footer {
-    margin-top: 25px;
-    font-size: 13px;
-    color: #777;
-    position: relative;
-}
-.footer {
-    margin-top: 25px;
-    text-align: center;
-}
-
-/* الحاوية للنص مع العلمين */
-.animated-text-container {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px; /* المسافة بين النص والعلم */
-}
-
-/* حجم العلم */
-.footer-flag {
-    width: 25px;
-    height: 16px;
-}
-
 /* النص الأخضر المتلألئ */
 .animated-text {
     font-weight: bold;
-    font-size: 16px; /* خط متوسط */
-    color: #008000; /* اللون الأخضر */
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    padding: 0 2px; /* مسافة صغيرة بين النص والعلم */
-}
-
-/* تأثير اللمعة */
-.animated-text::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 50%;
-    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
-    transform: skewX(-20deg);
-    animation: shine 3s ease-in-out infinite;
-}
-
-@keyframes shine {
-    0% { left: -75%; }
-    50% { left: 100%; }
-    100% { left: -75%; }
-}
-
-/* نص أخضر متوسط مع لمعة تتحرك */
-.animated-text {
-    font-weight: bold;
-    font-size: 23px; /* خط متوسط */
+    font-size: 23px;
     margin-top: 10px;
-    color: #008000; /* اللون الأخضر */
+    color: #008000;
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -593,7 +530,7 @@ body {
     left: -75%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
     transform: skewX(-20deg);
     animation: shine 3s ease-in-out infinite;
 }
@@ -602,4 +539,191 @@ body {
     0% { left: -75%; }
     50% { left: 100%; }
     100% { left: -75%; }
+}
+
+/* ============================================
+   📱 تحسينات التوافق مع الهواتف (Media Queries)
+   ============================================ */
+
+/* للأجهزة اللوحية والشاشات المتوسطة */
+@media (max-width: 992px) {
+    .glow-text {
+        font-size: 2.8rem;
+    }
+    .date-glow {
+        font-size: 2.4rem;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* للهواتف الكبيرة (عرض 768px أو أقل) */
+@media (max-width: 768px) {
+    /* تصغير أحجام الخطوط */
+    .splash-content h1 {
+        font-size: 2rem;
+    }
+    .splash-content p {
+        font-size: 1rem;
+    }
+    .romantic-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    .glow-text {
+        font-size: 2.2rem;
+    }
+    .date-glow {
+        font-size: 1.8rem;
+    }
+    .section-title {
+        font-size: 1.6rem;
+    }
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    .romantic-quote {
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+    }
+
+    /* تقليل ارتفاعات العناصر */
+    #heart-3d-container {
+        height: 65vh;
+    }
+    .hero-text-overlay {
+        margin-bottom: 4vh;
+    }
+
+    /* شبكة العدادات: عمود واحد */
+    .counters-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .counter-card {
+        padding: 20px;
+    }
+    .counter-card h3 {
+        font-size: 1.2rem;
+    }
+    .counter-time {
+        font-size: 1rem;
+    }
+
+    /* شبكة المعرض: عمودان أو عمود واحد حسب المساحة */
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+    }
+    .gallery-item {
+        height: 200px;
+    }
+    .gallery-overlay span {
+        font-size: 0.9rem;
+    }
+
+    /* زر الموسيقى أصغر قليلاً */
+    .floating-music-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        top: 15px;
+        left: 15px;
+    }
+
+    /* تذييل */
+    .copyright {
+        font-size: 16px;
+    }
+    .developer-tag {
+        font-size: 15px;
+    }
+    .legal-notice {
+        font-size: 13px;
+    }
+
+    /* أيقونات التواصل */
+    .social {
+        gap: 15px;
+    }
+    .social a {
+        font-size: 14px;
+    }
+    .social img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* للهواتف الصغيرة جداً (عرض 480px أو أقل) */
+@media (max-width: 480px) {
+    .splash-content h1 {
+        font-size: 1.6rem;
+    }
+    .splash-content p {
+        font-size: 0.9rem;
+    }
+    .romantic-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .glow-text {
+        font-size: 1.8rem;
+    }
+    .date-glow {
+        font-size: 1.5rem;
+    }
+    .section-title {
+        font-size: 1.3rem;
+    }
+    .romantic-quote {
+        font-size: 1rem;
+        line-height: 1.6rem;
+    }
+
+    #heart-3d-container {
+        height: 55vh;
+    }
+    .hero-text-overlay {
+        margin-bottom: 3vh;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    .gallery-item {
+        height: 160px;
+    }
+
+    .counter-card {
+        padding: 15px;
+    }
+    .counter-card i {
+        font-size: 2rem;
+    }
+    .counter-card h3 {
+        font-size: 1rem;
+    }
+    .counter-time {
+        font-size: 0.9rem;
+    }
+
+    .floating-music-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+        top: 10px;
+        left: 10px;
+    }
+
+    .social a {
+        font-size: 12px;
+    }
+    .social img {
+        width: 24px;
+        height: 24px;
+    }
 }
