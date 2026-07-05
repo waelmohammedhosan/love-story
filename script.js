@@ -29,19 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
         new Typed('#typewriter-text-1', {
             strings: ['مرحباً بحبيبتي وزوجتي ❤️'],
-            typeSpeed: 60,
+            typeSpeed: 40,
             showCursor: false,
             onComplete: () => {
                 setTimeout(() => {
                     new Typed('#typewriter-text-2', {
                         strings: ['هذه ليست مجرد صفحة... إنها قصة حياتنا من 2025/12/26 إلى 2026/6/26 💍❤️'],
-                        typeSpeed: 45,
+                        typeSpeed: 20,
                         showCursor: false,
                         onComplete: () => {
                             const btn = document.getElementById("start-btn-container");
                             if (btn) {
                                 btn.style.display = "block";
-                                gsap.fromTo(btn, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 });
+                                gsap.fromTo(btn, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.3 });
                             }
                         }
                     });
