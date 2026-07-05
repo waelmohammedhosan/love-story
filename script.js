@@ -1,6 +1,4 @@
-// ==========================================
-// 🛠️ الإعلان عن المتغيرات العامة
-// ==========================================
+// ===== المتغيرات العامة =====
 let scene, camera, renderer, heartMesh, letterW, letterA;
 let container, isMobile = window.innerWidth < 768;
 
@@ -8,7 +6,7 @@ const importantDates = [
     { title: "بداية الحب", date: "2026-01-01T18:00:00", icon: "fa-heart" },
     { title: "تاريخ الزواج", date: "2026-06-26T16:00:00", icon: "fa-ring" },
     { title: "أول لقاء", date: "2026-05-14T15:30:00", icon: "fa-rose" },
-    { title: "تاريخ تحليل الدم", date: "2026-05-18T10:00:00", icon: "fa-droplet" },
+    { title: "تحليل الدم", date: "2026-05-18T10:00:00", icon: "fa-droplet" },
     { title: "أول رسالة", date: "2025-12-26T20:22:00", icon: "fa-envelope" },
     { title: "أول مكالمة", date: "2026-01-20T20:05:00", icon: "fa-phone" },
     { title: "الخطوبة", date: "2026-05-18T17:00:00", icon: "fa-certificate" },
@@ -19,17 +17,15 @@ const importantDates = [
 const romanticPhrases = [
     "أنتِ اللحظة الحية في قلبي، خُلقتُ لأحميكِ بجسدي وروحي W❤️A.",
     "وإن سألوني عن وطني وأماني؟ سأشير لعظام صدرك وعينيكِ الحوراوين W❤️A.",
-    "حبكِ كالعُمر الفخم الحقيقي، لا يتكرر في تاريخ البشرية مرتين W❤️A.",
-    "في كل نبضة ودقة قلب يتجدد عهدي ووفائي الأبدي لكِ وعنكِ W❤️A.",
-    "وجودكِ بجانبي يجعلني أقوى رجل في الكون، دمتِ لي عمراً لا ينتهي W❤️A.",
-    "عسى النصيب يصيب واشوفك حلالي والحمد لله صرتي حلالي W❤️A 2026/6/26."
+    "حبكِ كالعُمر الفخم الحقيقي، لا يتكرر في التاريخ مرتين W❤️A.",
+    "في كل نبضة يتجدد عهدي الأبدي لكِ W❤️A.",
+    "وجودكِ بجانبي يجعلني أقوى رجل في الكون W❤️A.",
+    "عسى النصيب يصيب واشوفك حلالي والحمد لله W❤️A 2026/6/26."
 ];
 
-// ==========================================
-// 🚀 التشغيل الرئيسي
-// ==========================================
+// ===== تشغيل عند تحميل الصفحة =====
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. أنيميشن الترحيب
+    // الكتابة التلقائية
     try {
         new Typed('#typewriter-text-1', {
             strings: ['مرحباً بحبيبتي وزوجتي ❤️'],
@@ -38,103 +34,97 @@ document.addEventListener("DOMContentLoaded", () => {
             onComplete: () => {
                 setTimeout(() => {
                     new Typed('#typewriter-text-2', {
-                        strings: ['هذه ليست مجرد صفحة... إنها قصة حياتنا وثنايا حبنا مخلدة من 2025/12/26 إلى 2026/6/26 💍❤️'],
-                        typeSpeed: 50,
+                        strings: ['هذه ليست مجرد صفحة... إنها قصة حياتنا من 2025/12/26 إلى 2026/6/26 💍❤️'],
+                        typeSpeed: 45,
                         showCursor: false,
                         onComplete: () => {
-                            const btnContainer = document.getElementById("start-btn-container");
-                            if (btnContainer) {
-                                btnContainer.style.display = "block";
-                                gsap.fromTo("#start-btn-container", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 });
+                            const btn = document.getElementById("start-btn-container");
+                            if (btn) {
+                                btn.style.display = "block";
+                                gsap.fromTo(btn, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 });
                             }
                         }
                     });
-                }, 500);
+                }, 400);
             }
         });
-    } catch (e) { console.log("Typed.js configuration skipped"); }
+    } catch(e) { console.log("Typed error"); }
 
-    // 2. تفعيل الصوت والبداية
+    // زر البداية
     const startBtn = document.getElementById("start-journey-btn");
     if (startBtn) {
         startBtn.addEventListener("click", () => {
             const splash = document.getElementById("splash-screen");
             const audio = document.getElementById("romantic-audio");
             const musicBtn = document.getElementById("music-toggle");
-            const musicIcon = document.getElementById("music-icon");
+            const icon = document.getElementById("music-icon");
 
             if (audio) {
                 audio.play().then(() => {
                     if (musicBtn) musicBtn.classList.add("playing");
-                    if (musicIcon) musicIcon.className = "fas fa-pause";
-                }).catch(e => console.log("Audio play restricted"));
+                    if (icon) icon.className = "fas fa-pause";
+                }).catch(() => {});
             }
 
             if (splash) {
-                gsap.to(splash, { opacity: 0, duration: 1.2, onComplete: () => {
+                gsap.to(splash, { opacity: 0, duration: 1, onComplete: () => {
                     splash.style.display = "none";
-                    if (typeof AOS !== 'undefined') AOS.init({ duration: 1000, once: true });
-                } });
+                    if (typeof AOS !== 'undefined') AOS.init({ duration: 800, once: true });
+                }});
             }
         });
     }
 
-    // تشغيل الميزات
-    try { initMusicControls(); } catch (err) { console.error("Music error:", err); }
-    try { initSurpriseButton(); } catch (err) { console.error("Surprise button error:", err); }
-    try { initLiveCounters(); } catch (err) { console.error("Counters error:", err); }
-    try { initThreeJSScene(); } catch (err) { console.error("ThreeJS error:", err); }
+    // تشغيل الوظائف
+    try { initMusicControls(); } catch(e) {}
+    try { initSurpriseButton(); } catch(e) {}
+    try { initLiveCounters(); } catch(e) {}
+    try { initThreeJSScene(); } catch(e) {}
 });
 
-// ==========================================
-// 🎵 التحكم بالموسيقى
-// ==========================================
+// ===== تحكم الموسيقى =====
 function initMusicControls() {
     const audio = document.getElementById("romantic-audio");
-    const musicBtn = document.getElementById("music-toggle");
-    const musicIcon = document.getElementById("music-icon");
-    if (!audio || !musicBtn) return;
+    const btn = document.getElementById("music-toggle");
+    const icon = document.getElementById("music-icon");
+    if (!audio || !btn) return;
 
-    musicBtn.addEventListener("click", () => {
+    btn.addEventListener("click", () => {
         if (audio.paused) {
             audio.play();
-            musicBtn.classList.add("playing");
-            if (musicIcon) musicIcon.className = "fas fa-pause";
+            btn.classList.add("playing");
+            if (icon) icon.className = "fas fa-pause";
         } else {
             audio.pause();
-            musicBtn.classList.remove("playing");
-            if (musicIcon) musicIcon.className = "fas fa-play";
+            btn.classList.remove("playing");
+            if (icon) icon.className = "fas fa-play";
         }
     });
 }
 
-// ==========================================
-// 🎁 زر المفاجأة
-// ==========================================
+// ===== زر المفاجأة =====
 function initSurpriseButton() {
-    const surpriseBtn = document.getElementById("ultimate-love-btn");
-    if (!surpriseBtn) return;
+    const btn = document.getElementById("ultimate-love-btn");
+    if (!btn) return;
 
-    surpriseBtn.addEventListener("click", () => {
+    btn.addEventListener("click", () => {
         if (typeof confetti === 'function') {
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            confetti({ particleCount: 120, spread: 70, origin: { y: 0.5 } });
         }
 
         const popup = document.createElement("div");
         popup.className = "surprise-card-popup";
-        const randomPhrase = romanticPhrases[Math.floor(Math.random() * romanticPhrases.length)];
-        popup.innerHTML = `<div class="popup-heart-3d">❤️</div><p class="popup-text">${randomPhrase}</p>`;
+        const phrase = romanticPhrases[Math.floor(Math.random() * romanticPhrases.length)];
+        popup.innerHTML = `<div class="popup-heart-3d">❤️</div><p class="popup-text">${phrase}</p>`;
 
         document.body.appendChild(popup);
 
-        gsap.fromTo(popup, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5 });
-        gsap.to(popup, { opacity: 0, y: -100, delay: 3.5, duration: 0.5, onComplete: () => popup.remove() });
+        gsap.fromTo(popup, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4 });
+        gsap.to(popup, { opacity: 0, y: -80, delay: 3.2, duration: 0.5, onComplete: () => popup.remove() });
     });
 }
 
-// ==========================================
-// ⏳ العدادات التنازلية
-// ==========================================
+// ===== العدادات =====
 function initLiveCounters() {
     const grid = document.getElementById("counters-grid");
     if (!grid) return;
@@ -149,30 +139,27 @@ function initLiveCounters() {
 
     setInterval(() => {
         importantDates.forEach((item, idx) => {
-            const element = document.getElementById(`ct-${idx}`);
-            if (!element) return;
+            const el = document.getElementById(`ct-${idx}`);
+            if (!el) return;
             const diff = new Date().getTime() - new Date(item.date).getTime();
-            const d = Math.floor(Math.abs(diff) / (1000 * 60 * 60 * 24));
-            element.innerHTML = `${diff > 0 ? "منذ" : "متبقي"} ${d} يوم`;
+            const days = Math.floor(Math.abs(diff) / (1000 * 60 * 60 * 24));
+            el.innerHTML = `${diff > 0 ? "منذ" : "متبقي"} ${days} يوم`;
         });
     }, 1000);
 }
 
-// ==========================================
-// 🧊 محرك 3D المتجاوب مع إعادة ضبط ديناميكية
-// ==========================================
+// ===== مشهد 3D =====
 function initThreeJSScene() {
     container = document.getElementById('heart-3d-container');
     if (!container || typeof THREE === 'undefined') return;
 
-    // تحديد الإعدادات بناءً على حجم الشاشة
     const updateSizes = () => {
         isMobile = window.innerWidth < 768;
         const w = container.clientWidth;
         const h = container.clientHeight;
         if (camera) {
             camera.aspect = w / h;
-            camera.position.z = isMobile ? 120 : 85;
+            camera.position.z = isMobile ? 130 : 85;
             camera.updateProjectionMatrix();
         }
         if (renderer) {
@@ -180,10 +167,9 @@ function initThreeJSScene() {
         }
     };
 
-    // إعداد المشهد
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.z = isMobile ? 120 : 85;
+    camera = new THREE.PerspectiveCamera(55, container.clientWidth / container.clientHeight, 0.1, 500);
+    camera.position.z = isMobile ? 130 : 85;
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -192,13 +178,13 @@ function initThreeJSScene() {
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
 
-    // الإضاءة
-    scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-    const dirLight = new THREE.DirectionalLight(0xff758c, 1.6);
-    dirLight.position.set(0, 60, 120);
+    // إضاءة
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+    const dirLight = new THREE.DirectionalLight(0xff758c, 1.4);
+    dirLight.position.set(0, 50, 100);
     scene.add(dirLight);
 
-    // 1. مجسم القلب
+    // ===== القلب =====
     const heartShape = new THREE.Shape();
     heartShape.moveTo(25, 25);
     heartShape.bezierCurveTo(25, 25, 20, 0, 0, 0);
@@ -208,169 +194,142 @@ function initThreeJSScene() {
     heartShape.bezierCurveTo(80, 35, 80, 0, 50, 0);
     heartShape.bezierCurveTo(35, 0, 25, 25, 25, 25);
 
-    const extrudeSettings = { depth: 12, bevelEnabled: true, bevelSegments: 6, steps: 2, bevelSize: 2, bevelThickness: 2 };
+    const extrudeSettings = { depth: 12, bevelEnabled: true, bevelSegments: 4, steps: 2, bevelSize: 2, bevelThickness: 2 };
     const heartGeo = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
     heartGeo.center();
 
+    const scaleFactor = isMobile ? 0.28 : 0.4;
     heartMesh = new THREE.Mesh(heartGeo, new THREE.MeshStandardMaterial({
         color: 0xd6133d,
-        roughness: 0.15,
-        metalness: 0.4,
+        roughness: 0.2,
+        metalness: 0.3,
         emissive: 0x1a0002
     }));
     heartMesh.rotation.x = Math.PI;
-    const scaleFactor = isMobile ? 0.3 : 0.4;
     heartMesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
     scene.add(heartMesh);
 
-    // إعدادات الأحرف
-    const letterSettings = { depth: 5, bevelEnabled: true, bevelSegments: 4, bevelSize: 0.8, bevelThickness: 0.8 };
-    const goldMaterial = new THREE.MeshStandardMaterial({ color: 0xffd700, roughness: 0.2, metalness: 0.8 });
-    const roseMaterial = new THREE.MeshStandardMaterial({ color: 0xff69b4, roughness: 0.2, metalness: 0.7 });
+    // ===== الحروف =====
+    const letterSettings = { depth: 5, bevelEnabled: true, bevelSegments: 3, bevelSize: 0.8, bevelThickness: 0.8 };
+    const goldMat = new THREE.MeshStandardMaterial({ color: 0xffd700, roughness: 0.2, metalness: 0.7 });
+    const roseMat = new THREE.MeshStandardMaterial({ color: 0xff69b4, roughness: 0.2, metalness: 0.6 });
 
-    const letterXOffset = isMobile ? 32 : 42;
+    const offset = isMobile ? 28 : 42;
+    const lScale = scaleFactor * 1.3;
 
-    // 2. حرف W
+    // حرف W
     const wShape = new THREE.Shape();
-    wShape.moveTo(-15, 15);
-    wShape.lineTo(-10, -15);
-    wShape.lineTo(-4, -15);
-    wShape.lineTo(0, -3);
-    wShape.lineTo(4, -15);
-    wShape.lineTo(10, -15);
-    wShape.lineTo(15, 15);
-    wShape.lineTo(9, 15);
-    wShape.lineTo(6, -6);
-    wShape.lineTo(2, 6);
-    wShape.lineTo(-2, 6);
-    wShape.lineTo(-6, -6);
-    wShape.lineTo(-9, 15);
-    wShape.closePath();
+    wShape.moveTo(-15, 15); wShape.lineTo(-10, -15); wShape.lineTo(-4, -15);
+    wShape.lineTo(0, -3); wShape.lineTo(4, -15); wShape.lineTo(10, -15);
+    wShape.lineTo(15, 15); wShape.lineTo(9, 15); wShape.lineTo(6, -6);
+    wShape.lineTo(2, 6); wShape.lineTo(-2, 6); wShape.lineTo(-6, -6);
+    wShape.lineTo(-9, 15); wShape.closePath();
 
-    const letterGeoW = new THREE.ExtrudeGeometry(wShape, letterSettings);
-    letterGeoW.center();
-    letterW = new THREE.Mesh(letterGeoW, goldMaterial);
-    letterW.position.set(-letterXOffset, 0, 0);
-    letterW.scale.set(scaleFactor * 1.4, scaleFactor * 1.4, scaleFactor * 1.4);
+    const wGeo = new THREE.ExtrudeGeometry(wShape, letterSettings);
+    wGeo.center();
+    letterW = new THREE.Mesh(wGeo, goldMat);
+    letterW.position.set(-offset, 0, 0);
+    letterW.scale.set(lScale, lScale, lScale);
     scene.add(letterW);
 
-    // 3. حرف A
+    // حرف A
     const aShape = new THREE.Shape();
-    aShape.moveTo(-14, -15);
-    aShape.lineTo(0, 15);
-    aShape.lineTo(14, -15);
-    aShape.lineTo(6, -15);
-    aShape.lineTo(3, -6);
-    aShape.lineTo(-3, -6);
-    aShape.lineTo(-6, -15);
-    aShape.closePath();
+    aShape.moveTo(-14, -15); aShape.lineTo(0, 15); aShape.lineTo(14, -15);
+    aShape.lineTo(6, -15); aShape.lineTo(3, -6); aShape.lineTo(-3, -6);
+    aShape.lineTo(-6, -15); aShape.closePath();
+    const hole = new THREE.Path();
+    hole.moveTo(0, 5); hole.lineTo(2, -1); hole.lineTo(-2, -1); hole.closePath();
+    aShape.holes.push(hole);
 
-    const holePath = new THREE.Path();
-    holePath.moveTo(0, 5);
-    holePath.lineTo(2, -1);
-    holePath.lineTo(-2, -1);
-    holePath.closePath();
-    aShape.holes.push(holePath);
-
-    const letterGeoA = new THREE.ExtrudeGeometry(aShape, letterSettings);
-    letterGeoA.center();
-    letterA = new THREE.Mesh(letterGeoA, roseMaterial);
-    letterA.position.set(letterXOffset, 0, 0);
-    letterA.scale.set(scaleFactor * 1.4, scaleFactor * 1.4, scaleFactor * 1.4);
+    const aGeo = new THREE.ExtrudeGeometry(aShape, letterSettings);
+    aGeo.center();
+    letterA = new THREE.Mesh(aGeo, roseMat);
+    letterA.position.set(offset, 0, 0);
+    letterA.scale.set(lScale, lScale, lScale);
     scene.add(letterA);
 
-    // ==========================================
-    // 🔄 حلقة الأنيميشن
-    // ==========================================
+    // ===== حلقة الحركة =====
     const clock = new THREE.Clock();
 
     function animate() {
         requestAnimationFrame(animate);
-        const time = clock.getElapsedTime();
+        const t = clock.getElapsedTime();
 
         if (heartMesh) {
-            heartMesh.rotation.y = Math.sin(time * 0.5) * 0.15;
-            const pulse = 1 + Math.sin(time * 2.5) * 0.03;
-            const s = pulse * scaleFactor;
-            heartMesh.scale.set(s, s, s);
+            heartMesh.rotation.y = Math.sin(t * 0.4) * 0.12;
+            const s = 1 + Math.sin(t * 2.2) * 0.025;
+            heartMesh.scale.set(s * scaleFactor, s * scaleFactor, s * scaleFactor);
         }
 
         if (letterW) {
-            letterW.rotation.y = time * 1.2;
-            letterW.position.y = Math.sin(time * 2) * 1.5;
+            letterW.rotation.y = t * 1.0;
+            letterW.position.y = Math.sin(t * 1.8) * 1.2;
         }
 
         if (letterA) {
-            letterA.rotation.y = time * 1.2;
-            letterA.position.y = Math.sin(time * 2 + Math.PI) * 1.5;
+            letterA.rotation.y = t * 1.0;
+            letterA.position.y = Math.sin(t * 1.8 + Math.PI) * 1.2;
         }
 
         renderer.render(scene, camera);
     }
     animate();
 
-    // تحديث الحجم عند تغيير النافذة
+    // ===== إعادة الضبط عند تغيير الحجم =====
     window.addEventListener('resize', () => {
         updateSizes();
-        // إعادة ضبط مقياس وموضع الحروف إذا تغيرت حالة الجوال
         const newMobile = window.innerWidth < 768;
         if (newMobile !== isMobile) {
             isMobile = newMobile;
-            const newScale = isMobile ? 0.3 : 0.4;
-            const newOffset = isMobile ? 32 : 42;
-            if (heartMesh) {
-                const s = newScale;
-                heartMesh.scale.set(s, s, s);
-            }
+            const newScale = isMobile ? 0.28 : 0.4;
+            const newOffset = isMobile ? 28 : 42;
+            const newLScale = newScale * 1.3;
+
+            if (heartMesh) heartMesh.scale.set(newScale, newScale, newScale);
             if (letterW) {
                 letterW.position.x = -newOffset;
-                const s = newScale * 1.4;
-                letterW.scale.set(s, s, s);
+                letterW.scale.set(newLScale, newLScale, newLScale);
             }
             if (letterA) {
                 letterA.position.x = newOffset;
-                const s = newScale * 1.4;
-                letterA.scale.set(s, s, s);
+                letterA.scale.set(newLScale, newLScale, newLScale);
             }
         }
     });
 
-    // تحديث أولي بعد ظهور العنصر
-    setTimeout(updateSizes, 100);
+    setTimeout(updateSizes, 150);
 }
 
-// ==========================================
-// 🖼️ فتح وإغلاق Lightbox (لم نغيره)
-// ==========================================
-function openLightbox(element) {
+// ===== Lightbox =====
+function openLightbox(el) {
     const modal = document.getElementById('lightbox-modal');
     const img = document.getElementById('lightbox-img');
     const video = document.getElementById('lightbox-video');
 
-    const isVideo = element.querySelector('video') !== null;
+    const isVideo = el.querySelector('video') !== null;
     if (isVideo) {
-        const vid = element.querySelector('video');
-        video.src = vid.src;
+        const v = el.querySelector('video');
+        video.src = v.src;
         video.style.display = 'block';
         img.style.display = 'none';
         video.load();
         video.play();
     } else {
-        const imgSrc = element.querySelector('img').src;
-        img.src = imgSrc;
+        const src = el.querySelector('img').src;
+        img.src = src;
         img.style.display = 'block';
         video.style.display = 'none';
         video.pause();
     }
 
-    modal.classList.add('active');
     modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('active'), 20);
 }
 
 function closeLightbox() {
     const modal = document.getElementById('lightbox-modal');
     const video = document.getElementById('lightbox-video');
     video.pause();
-    modal.style.display = 'none';
     modal.classList.remove('active');
+    setTimeout(() => { modal.style.display = 'none'; }, 300);
 }
