@@ -1,5 +1,5 @@
 // ===== المتغيرات العامة =====
-let scene, camera, renderer, heartMesh, letterW, letterA;
+let scene, camera, renderer, videoMesh;
 let container, isMobile = window.innerWidth < 768;
 
 const importantDates = [
@@ -11,17 +11,16 @@ const importantDates = [
     { title: "أول مكالمة", date: "2026-01-20T20:05:00", icon: "fa-phone" },
     { title: "الخطوبة", date: "2026-05-18T17:00:00", icon: "fa-certificate" },
     { title: "عيد ميلادها", date: "2027-05-18T00:00:00", icon: "fa-cake-candles" },
-    { title: "عيد ميلادي", date: "2027-04-23T00:00:00", icon: "fa-gift" }
+    { title: "عيد ميلادي", date: "2027-04-23T00:00:00", icon: "fa-gift" },
 ];
 
 const romanticPhrases = [
-    "أنتِ اللحظة الحية في قلبي، خُلقتُ لأحميكِ بجسدي وروحي W❤️A.",
-    "وإن سألوني عن وطني وأماني؟ سأشير لعظام صدرك وعينيكِ الحوراوين W❤️A.",
-    "حبكِ كالعُمر الفخم الحقيقي، لا يتكرر في التاريخ مرتين W❤️A.",
-    "في كل نبضة يتجدد عهدي الأبدي لكِ W❤️A.",
-    "وجودكِ بجانبي يجعلني أقوى رجل في الكون W❤️A.",
-    "عسى النصيب يصيب واشوفك حلالي والحمد لله W❤️A 2026/6/26.",
-    " وانتهت القصة شايف بيها خير ومستاهلها W♥️A.",
+    "أنتِ اللحظة الحية في قلبي، خُلقتُ لأحميكِ بجسدي وروحي ❤️.",
+    "وإن سألوني عن وطني وأماني؟ سأشير لعظام صدرك وعينيكِ الحوراوين ❤️.",
+    "حبكِ كالعُمر الفخم الحقيقي، لا يتكرر في التاريخ مرتين ❤️.",
+    "في كل نبضة يتجدد عهدي الأبدي لكِ ❤️.",
+    "وجودكِ بجانبي يجعلني أقوى رجل في الكون ❤️.",
+    "عسى النصيب يصيب واشوفك حلالي والحمد لله ❤️ 2026/6/26."
 ];
 
 // ===== تشغيل عند تحميل الصفحة =====
@@ -30,13 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
         new Typed('#typewriter-text-1', {
             strings: ['مرحباً بحبيبتي وزوجتي ❤️'],
-            typeSpeed: 40,
+            typeSpeed: 10,
             showCursor: false,
             onComplete: () => {
                 setTimeout(() => {
                     new Typed('#typewriter-text-2', {
                         strings: ['هذه ليست مجرد صفحة... إنها قصة حياتنا من 2025/12/26 إلى 2026/6/26 💍❤️'],
-                        typeSpeed: 20,
+                        typeSpeed: 10,
                         showCursor: false,
                         onComplete: () => {
                             const btn = document.getElementById("start-btn-container");
@@ -103,25 +102,37 @@ function initMusicControls() {
     });
 }
 
-// ===== زر المفاجأة =====
+// ===== زر المفاجأة الجديد =====
 function initSurpriseButton() {
-    const btn = document.getElementById("ultimate-love-btn");
+    const btn = document.getElementById("surprise-btn-new");
     if (!btn) return;
 
     btn.addEventListener("click", () => {
+        // تأثير كونفيتي
         if (typeof confetti === 'function') {
-            confetti({ particleCount: 120, spread: 70, origin: { y: 0.5 } });
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 } });
+            setTimeout(() => {
+                confetti({ particleCount: 100, spread: 60, origin: { y: 0.4, x: 0.2 } });
+            }, 200);
+            setTimeout(() => {
+                confetti({ particleCount: 100, spread: 60, origin: { y: 0.4, x: 0.8 } });
+            }, 400);
         }
 
+        // إنشاء البطاقة المنبثقة
         const popup = document.createElement("div");
         popup.className = "surprise-card-popup";
         const phrase = romanticPhrases[Math.floor(Math.random() * romanticPhrases.length)];
-        popup.innerHTML = `<div class="popup-heart-3d">❤️</div><p class="popup-text">${phrase}</p>`;
+        popup.innerHTML = `
+            <div class="popup-heart-3d">❤️</div>
+            <p class="popup-text">${phrase}</p>
+            <div style="margin-top:15px;font-size:2rem;">💍✨</div>
+        `;
 
         document.body.appendChild(popup);
 
-        gsap.fromTo(popup, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4 });
-        gsap.to(popup, { opacity: 0, y: -80, delay: 3.2, duration: 0.5, onComplete: () => popup.remove() });
+        gsap.fromTo(popup, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" });
+        gsap.to(popup, { opacity: 0, y: -100, delay: 3.5, duration: 0.6, onComplete: () => popup.remove() });
     });
 }
 
@@ -134,7 +145,11 @@ function initLiveCounters() {
     importantDates.forEach((item, idx) => {
         const card = document.createElement("div");
         card.className = "counter-card";
-        card.innerHTML = `<i class="fas ${item.icon}"></i><h3>${item.title}</h3><div class="counter-time" id="ct-${idx}"></div>`;
+        card.innerHTML = `
+            <i class="fas ${item.icon}"></i>
+            <h3>${item.title}</h3>
+            <div class="counter-time" id="ct-${idx}"></div>
+        `;
         grid.appendChild(card);
     });
 
@@ -149,7 +164,7 @@ function initLiveCounters() {
     }, 1000);
 }
 
-// ===== مشهد 3D =====
+// ===== مشهد 3D مع فيديو بدلاً من الحروف والقلب =====
 function initThreeJSScene() {
     container = document.getElementById('heart-3d-container');
     if (!container || typeof THREE === 'undefined') return;
@@ -160,7 +175,7 @@ function initThreeJSScene() {
         const h = container.clientHeight;
         if (camera) {
             camera.aspect = w / h;
-            camera.position.z = isMobile ? 130 : 85;
+            camera.position.z = isMobile ? 8 : 5;
             camera.updateProjectionMatrix();
         }
         if (renderer) {
@@ -170,7 +185,7 @@ function initThreeJSScene() {
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(55, container.clientWidth / container.clientHeight, 0.1, 500);
-    camera.position.z = isMobile ? 130 : 85;
+    camera.position.z = isMobile ? 8 : 5;
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -185,69 +200,67 @@ function initThreeJSScene() {
     dirLight.position.set(0, 50, 100);
     scene.add(dirLight);
 
-    // ===== القلب =====
-    const heartShape = new THREE.Shape();
-    heartShape.moveTo(25, 25);
-    heartShape.bezierCurveTo(25, 25, 20, 0, 0, 0);
-    heartShape.bezierCurveTo(-30, 0, -30, 35, -30, 35);
-    heartShape.bezierCurveTo(-30, 55, -10, 77, 25, 95);
-    heartShape.bezierCurveTo(60, 77, 80, 55, 80, 35);
-    heartShape.bezierCurveTo(80, 35, 80, 0, 50, 0);
-    heartShape.bezierCurveTo(35, 0, 25, 25, 25, 25);
+    // ===== إنشاء فيديو كعنصر ثلاثي الأبعاد =====
+    const video = document.createElement('video');
+    video.src = 'love2002.mp4';
+    video.loop = true;
+    video.muted = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.crossOrigin = 'anonymous';
+    video.style.display = 'none';
+    document.body.appendChild(video);
 
-    const extrudeSettings = { depth: 12, bevelEnabled: true, bevelSegments: 4, steps: 2, bevelSize: 2, bevelThickness: 2 };
-    const heartGeo = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
-    heartGeo.center();
+    // إنشاء نسيج الفيديو
+    const videoTexture = new THREE.VideoTexture(video);
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
+    videoTexture.format = THREE.RGBFormat;
 
-    const scaleFactor = isMobile ? 0.28 : 0.4;
-    heartMesh = new THREE.Mesh(heartGeo, new THREE.MeshStandardMaterial({
-        color: 0xd6133d,
-        roughness: 0.2,
-        metalness: 0.3,
-        emissive: 0x1a0002
-    }));
-    heartMesh.rotation.x = Math.PI;
-    heartMesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
-    scene.add(heartMesh);
+    // إنشاء سطح مستوي لعرض الفيديو
+    const geometry = new THREE.PlaneGeometry(4, 4);
+    const material = new THREE.MeshBasicMaterial({
+        map: videoTexture,
+        side: THREE.DoubleSide
+    });
 
-    // ===== الحروف =====
-    const letterSettings = { depth: 5, bevelEnabled: true, bevelSegments: 3, bevelSize: 0.8, bevelThickness: 0.8 };
-    const goldMat = new THREE.MeshStandardMaterial({ color: 0xffd700, roughness: 0.2, metalness: 0.7 });
-    const roseMat = new THREE.MeshStandardMaterial({ color: 0xff69b4, roughness: 0.2, metalness: 0.6 });
+    videoMesh = new THREE.Mesh(geometry, material);
+    videoMesh.position.set(0, 0, 0);
+    scene.add(videoMesh);
 
-    const offset = isMobile ? 28 : 42;
-    const lScale = scaleFactor * 1.3;
+    // إضافة إطار حول الفيديو
+    const borderGeometry = new THREE.EdgesGeometry(geometry);
+    const borderMaterial = new THREE.LineBasicMaterial({ 
+        color: 0xff416c,
+        transparent: true,
+        opacity: 0.6
+    });
+    const border = new THREE.LineSegments(borderGeometry, borderMaterial);
+    border.position.copy(videoMesh.position);
+    scene.add(border);
 
-    // حرف W
-    const wShape = new THREE.Shape();
-    wShape.moveTo(-15, 15); wShape.lineTo(-10, -15); wShape.lineTo(-4, -15);
-    wShape.lineTo(0, -3); wShape.lineTo(4, -15); wShape.lineTo(10, -15);
-    wShape.lineTo(15, 15); wShape.lineTo(9, 15); wShape.lineTo(6, -6);
-    wShape.lineTo(2, 6); wShape.lineTo(-2, 6); wShape.lineTo(-6, -6);
-    wShape.lineTo(-9, 15); wShape.closePath();
+    // إضافة جسيمات متوهجة حول الفيديو
+    const particleCount = 200;
+    const particlesGeometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 10;
+    }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+        color: 0xff6b8a,
+        size: 0.05,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending
+    });
+    
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
 
-    const wGeo = new THREE.ExtrudeGeometry(wShape, letterSettings);
-    wGeo.center();
-    letterW = new THREE.Mesh(wGeo, goldMat);
-    letterW.position.set(-offset, 0, 0);
-    letterW.scale.set(lScale, lScale, lScale);
-    scene.add(letterW);
-
-    // حرف A
-    const aShape = new THREE.Shape();
-    aShape.moveTo(-14, -15); aShape.lineTo(0, 15); aShape.lineTo(14, -15);
-    aShape.lineTo(6, -15); aShape.lineTo(3, -6); aShape.lineTo(-3, -6);
-    aShape.lineTo(-6, -15); aShape.closePath();
-    const hole = new THREE.Path();
-    hole.moveTo(0, 5); hole.lineTo(2, -1); hole.lineTo(-2, -1); hole.closePath();
-    aShape.holes.push(hole);
-
-    const aGeo = new THREE.ExtrudeGeometry(aShape, letterSettings);
-    aGeo.center();
-    letterA = new THREE.Mesh(aGeo, roseMat);
-    letterA.position.set(offset, 0, 0);
-    letterA.scale.set(lScale, lScale, lScale);
-    scene.add(letterA);
+    // تشغيل الفيديو
+    video.play().catch(() => {});
 
     // ===== حلقة الحركة =====
     const clock = new THREE.Clock();
@@ -256,21 +269,19 @@ function initThreeJSScene() {
         requestAnimationFrame(animate);
         const t = clock.getElapsedTime();
 
-        if (heartMesh) {
-            heartMesh.rotation.y = Math.sin(t * 0.4) * 0.12;
-            const s = 1 + Math.sin(t * 2.2) * 0.025;
-            heartMesh.scale.set(s * scaleFactor, s * scaleFactor, s * scaleFactor);
+        if (videoMesh) {
+            // دوران خفيف
+            videoMesh.rotation.y = Math.sin(t * 0.2) * 0.1;
+            videoMesh.rotation.x = Math.sin(t * 0.15) * 0.05;
+            
+            // نبض خفيف
+            const scale = 1 + Math.sin(t * 1.5) * 0.02;
+            videoMesh.scale.set(scale, scale, 1);
         }
 
-        if (letterW) {
-            letterW.rotation.y = t * 1.0;
-            letterW.position.y = Math.sin(t * 1.8) * 1.2;
-        }
-
-        if (letterA) {
-            letterA.rotation.y = t * 1.0;
-            letterA.position.y = Math.sin(t * 1.8 + Math.PI) * 1.2;
-        }
+        // تدوير الجسيمات
+        particles.rotation.y = t * 0.05;
+        particles.rotation.x = Math.sin(t * 0.03) * 0.1;
 
         renderer.render(scene, camera);
     }
@@ -279,23 +290,6 @@ function initThreeJSScene() {
     // ===== إعادة الضبط عند تغيير الحجم =====
     window.addEventListener('resize', () => {
         updateSizes();
-        const newMobile = window.innerWidth < 768;
-        if (newMobile !== isMobile) {
-            isMobile = newMobile;
-            const newScale = isMobile ? 0.28 : 0.4;
-            const newOffset = isMobile ? 28 : 42;
-            const newLScale = newScale * 1.3;
-
-            if (heartMesh) heartMesh.scale.set(newScale, newScale, newScale);
-            if (letterW) {
-                letterW.position.x = -newOffset;
-                letterW.scale.set(newLScale, newLScale, newLScale);
-            }
-            if (letterA) {
-                letterA.position.x = newOffset;
-                letterA.scale.set(newLScale, newLScale, newLScale);
-            }
-        }
     });
 
     setTimeout(updateSizes, 150);

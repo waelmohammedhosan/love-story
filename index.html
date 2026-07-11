@@ -20,11 +20,15 @@
     <!-- شاشة البداية -->
     <div id="splash-screen">
         <div class="splash-content">
+            <!-- صورة بدلاً من الفيديو -->
+            <div class="splash-image-container">
+                <img src="splash-image.jpg" alt="حبنا" id="splash-image">
+            </div>
             <h1 id="typewriter-text-1"></h1>
             <p id="typewriter-text-2"></p>
             <div id="start-btn-container" style="display: none;">
                 <button id="start-journey-btn" class="romantic-btn">
-                    <i class="fas fa-heart-pulse"></i> دخول إلى عالم حبنا W❤️A
+                    <i class="fas fa-heart-pulse"></i> دخول إلى عالم حبنا
                 </button>
             </div>
         </div>
@@ -39,8 +43,11 @@
     <section id="hero">
         <div id="heart-3d-container"></div>
         <div class="hero-text-overlay">
-            <h2 class="glow-text">أحبك للأبد <i class="fas fa-heart"></i></h2>
+             <h3 class="glow-text date-glow">اللهم لا تجعل بيننا حزن ولا بعد واجعلنا في ود لا ينتهي</h3>
+            <h2 class="glow-text">أحبك للأبد  <i class="fas fa-heart"></i></h2>
             <h1 class="glow-text date-glow">2026/6/26 💍</h1>
+             <h1 class="glow-text date-glow">A <i class="fas fa-heart"></i> W </h1>
+           
         </div>
     </section>
 
@@ -56,19 +63,18 @@
     <section id="gallery-section">
         <div class="container">
             <h1 class="section-title" data-aos="fade-down">2026/6/26 💍❤️</h1>
-            <p class="section-subtitle" data-aos="fade-up">"ان الروح إذا التقت بمن يشبهها ترممت، وتعافت"<br>
- بسم الله الرحمن الرحيم <br>
- ومن آياته أن خلق لكم من أنفسكم أزواجا لتسكنوا إليها وجعل بينكم مودة ورحمةانعقد عقد الوعد،<br> 
- وعقد القلب بالقلب، وقد عقد قران الود بين قلبي وقلبها،<br>
-  عقدا لا يحله ريب المنون.<br>
-  الحمد لله الذي بنعمته تتم الصالحات..<br>
-  تم بحمد الله وفضله عقد قراني على من اختارها الله شريكة لي،<br>
-   اللهم عقدا متينا لا يخيب 💍<br>
+            <p class="section-subtitle" data-aos="fade-up">
+                "ان الروح إذا التقت بمن يشبهها ترممت، وتعافت"<br>
+                بسم الله الرحمن الرحيم <br>
+                ومن آياته أن خلق لكم من أنفسكم أزواجا لتسكنوا إليها وجعل بينكم مودة ورحمةانعقد عقد الوعد،<br> 
+                وعقد القلب بالقلب، وقد عقد قران الود بين قلبي وقلبها،<br>
+                عقدا لا يحله ريب المنون.<br>
+                الحمد لله الذي بنعمته تتم الصالحات..<br>
+                تم بحمد الله وفضله عقد قراني على من اختارها الله شريكة لي،<br>
+                اللهم عقدا متينا لا يخيب 💍<br>
             </p>
-            <h2 class="section-title" data-aos="fade-down">أجمل ذكرياتنا<br>26\12\2025
-            </h2>
+            <h2 class="section-title" data-aos="fade-down">أجمل ذكرياتنا<br>26\12\2025</h2>
             <div class="gallery-grid">
-                <!-- ضع صورك وفيديوهاتك هنا بنفس الطريقة -->
                 <div class="gallery-item" onclick="openLightbox(this)">
                     <img src="img1.jpg" alt="ذكريات">
                     <div class="gallery-overlay"><span><i class="fas fa-search-plus"></i></span></div>
@@ -77,11 +83,10 @@
                     <img src="img2.jpg" alt="ذكريات">
                     <div class="gallery-overlay"><span><i class="fas fa-search-plus"></i></span></div>
                 </div>
-                                <div class="gallery-item" onclick="openLightbox(this)">
+                <div class="gallery-item" onclick="openLightbox(this)">
                     <img src="img10.jpg" alt="ذكريات">
                     <div class="gallery-overlay"><span><i class="fas fa-search-plus"></i></span></div>
                 </div>
-
                 <div class="gallery-item video-item" onclick="openLightbox(this)">
                     <video src="video1.mp4" muted loop autoplay playsinline></video>
                     <div class="gallery-overlay"><span><i class="fas fa-play-circle"></i></span></div>
@@ -137,15 +142,15 @@
         <video id="lightbox-video" src="" controls style="display: none;"></video>
     </div>
 
-    <!-- زر المفاجأة -->
+    <!-- قسم المفاجأة مع زر جديد -->
     <section id="surprise-section">
         <div class="quote-container" data-aos="fade-up">
             <p class="romantic-quote">
                 "أنتِ لستِ جزءاً من العمر، أنتِ العمر كله.. خُلقتِ لتكوني لي، وخُلقتُ لأكون لكِ وطناً وأماناً وحباً لا ينتهي."
             </p>
         </div>
-        <button id="ultimate-love-btn" class="romantic-btn large">
-            <i class="fas fa-heart"></i> اضغط هنا ❤💍
+        <button id="surprise-btn-new">
+            <i class="fas fa-heart"></i> مفاجأة خاصة ❤️💍
         </button>
     </section>
 
@@ -157,31 +162,29 @@
             <p class="copyright">© جميع الحقوق محفوظة 2026</p>
             <p class="developer-tag">
                 <i class="fas fa-code"></i> تم التصميم وبرمجة الموقع بواسطة <span>وائل محمد</span>
-
+            </p>
             <p class="legal-notice">
                 <i class="fas fa-shield-alt"></i> جميع الأكواد والتصاميم محمية بحقوق الملكية الفكرية.
             </p>
-            <p class="developer-tag">
-    الجمهورية العربية السورية
-</p>
+            <p class="developer-tag">الجمهورية العربية السورية</p>
             <div class="flag-item">
                 <img src="https://flagcdn.com/w40/sy.png" alt="Syria">
             </div>
             <div class="social">
                 <a href="https://wa.me/962779966565" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> واتساب
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="واتساب"> واتساب
                 </a>
                 <a href="https://www.facebook.com/wwwwwwwwwwwwwwwwwwwwwv" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"> فيسبوك
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="فيسبوك"> فيسبوك
                 </a>
                 <a href="https://www.instagram.com/wael_mohammed2002/" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png"> انستجرام
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="انستجرام"> انستجرام
                 </a>
                 <a href="mailto:hosanmohammedwael@gmail.com" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"> إيميل
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="إيميل"> إيميل
                 </a>
                 <a href="https://t.me/wael_mohammed" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> تليجرام
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="تليجرام"> تليجرام
                 </a>
             </div>
         </div>
